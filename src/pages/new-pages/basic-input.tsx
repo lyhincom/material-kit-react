@@ -1,7 +1,9 @@
-import { Box, TextField, Typography } from '@mui/material';
+import { Box, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
 
 import { CONFIG } from 'src/config-global';
 import { DashboardContent } from 'src/layouts/dashboard';
+
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +36,22 @@ export default function Page() {
             variant="outlined"
             slotProps={{
               inputLabel: { shrink: true },
+              input: {
+                endAdornment: (
+                  <InputAdornment position="end" sx={{ pr: '5px' }}>
+                    <IconButton
+                      edge="end"
+                      onClick={() => console.log('Search clicked')}
+                      sx={{
+                        width: 48,
+                        height: 48,
+                      }}
+                    >
+                      <Iconify icon="eva:search-fill" width={28} />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              },
             }}
             sx={{
               width: 500,
