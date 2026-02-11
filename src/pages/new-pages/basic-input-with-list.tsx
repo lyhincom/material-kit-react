@@ -41,7 +41,7 @@ export default function Page() {
                   <InputAdornment position="end" sx={{ pr: '5px' }}>
                     <IconButton
                       edge="end"
-                      onClick={() => console.log('Search clicked')}
+                      onClick={() => console.log('Search clicked', value)}
                       sx={{
                         width: 48,
                         height: 48,
