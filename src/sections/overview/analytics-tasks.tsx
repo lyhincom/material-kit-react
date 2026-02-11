@@ -24,13 +24,16 @@ import { Scrollbar } from 'src/components/scrollbar';
 type Props = CardProps & {
   title?: string;
   subheader?: string;
+  minHeight?: string;
+  maxHeight?: number;
+  turnOnButton?: boolean;
   list: {
     id: string;
     name: string;
   }[];
 };
 
-export function AnalyticsTasks({ title, subheader, list, sx, ...other }: Props) {
+export function AnalyticsTasks({ title, subheader, list, sx, minHeight, maxHeight, turnOnButton, ...other }: Props) {
   const [selected, setSelected] = useState(['2']);
 
   const handleClickComplete = (taskId: string) => {
@@ -45,18 +48,53 @@ export function AnalyticsTasks({ title, subheader, list, sx, ...other }: Props) 
     <Card sx={sx} {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 1 }} />
 
-      <Scrollbar sx={{ minHeight: 304 }}>
-        <Stack divider={<Divider sx={{ borderStyle: 'dashed' }} />} sx={{ minWidth: 560 }}>
-          {list.map((item) => (
-            <TaskItem
-              key={item.id}
-              item={item}
-              selected={selected.includes(item.id)}
-              onChange={() => handleClickComplete(item.id)}
-            />
-          ))}
-        </Stack>
-      </Scrollbar>
+      {maxHeight ? (
+        <Box
+          sx={{
+            maxHeight: `${maxHeight}px`,
+            overflowY: 'auto',
+            '&::-webkit-scrollbar': {
+              width: '8px',
+            },
+            '&::-webkit-scrollbar-track': {
+              background: 'transparent',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: 'rgba(0,0,0,0.2)',
+              borderRadius: '4px',
+            },
+            '&::-webkit-scrollbar-thumb:hover': {
+              background: 'rgba(0,0,0,0.3)',
+            },
+          }}
+        >
+          <Stack divider={<Divider sx={{ borderStyle: 'dashed' }} />}>
+            {list.map((item) => (
+              <TaskItem
+                key={item.id}
+                item={item}
+                selected={selected.includes(item.id)}
+                onChange={() => handleClickComplete(item.id)}
+                turnOnButton={turnOnButton}
+              />
+            ))}
+          </Stack>
+        </Box>
+      ) : (
+        <Scrollbar sx={{ minHeight: 'auto'/* Lesson: component-input */ }}>
+          <Stack divider={<Divider sx={{ borderStyle: 'dashed' }} />}>
+            {list.map((item) => (
+              <TaskItem
+                key={item.id}
+                item={item}
+                selected={selected.includes(item.id)}
+                onChange={() => handleClickComplete(item.id)}
+                turnOnButton={turnOnButton}
+              />
+            ))}
+          </Stack>
+        </Scrollbar>
+      )}
     </Card>
   );
 }
@@ -65,11 +103,12 @@ export function AnalyticsTasks({ title, subheader, list, sx, ...other }: Props) 
 
 type TaskItemProps = BoxProps & {
   selected: boolean;
+  turnOnButton?: boolean;
   item: Props['list'][number];
   onChange: (id: string) => void;
 };
 
-function TaskItem({ item, selected, onChange, sx, ...other }: TaskItemProps) {
+function TaskItem({ item, selected, onChange, sx, turnOnButton, ...other }: TaskItemProps) {
   const menuActions = usePopover();
 
   const handleMarkComplete = () => {
@@ -123,9 +162,11 @@ function TaskItem({ item, selected, onChange, sx, ...other }: TaskItemProps) {
           sx={{ flexGrow: 1, m: 0 }}
         />
 
-        <IconButton color={menuActions.open ? 'inherit' : 'default'} onClick={menuActions.onOpen}>
-          <Iconify icon="eva:more-vertical-fill" />
-        </IconButton>
+        {turnOnButton && (
+          <IconButton color={menuActions.open ? 'inherit' : 'default'} onClick={menuActions.onOpen}>
+            <Iconify icon="eva:more-vertical-fill" />
+          </IconButton>
+        )}
       </Box>
 
       <Popover

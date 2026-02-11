@@ -29,6 +29,11 @@ export const navData = [
     icon: icon('ic-blog'),
   },
   {
+    title: 'Component Input',
+    path: '/component-input',
+    icon: icon('ic-blog'),
+  },
+  {
     title: 'Dashboard',
     path: '/',
     icon: icon('ic-analytics'),
