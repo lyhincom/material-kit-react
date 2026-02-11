@@ -1,5 +1,5 @@
 
-import { Box, Typography } from '@mui/material';
+import { Box, Checkbox, Typography, FormControlLabel } from '@mui/material';
 
 import { _tasks } from 'src/_mock/_data';
 import { CONFIG } from 'src/config-global';
@@ -27,7 +27,7 @@ export default function Page() {
 
         <Box
           sx={{
-            mb: { xs: 2 /* increase for mobile */, md: 1 },
+            mb: { xs: 0 /* increase for mobile */, md: 0 },
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -37,7 +37,7 @@ export default function Page() {
             component="ul"
             sx={{
               paddingLeft: '20px',
-              margin: '16px 0',
+              margin: '0 0',
               listStyleType: 'disc',
               width: '500px',
             }}
@@ -46,6 +46,26 @@ export default function Page() {
           </Box>
         </Box>
 
+        <Box
+          component="div"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Box
+            component="ul"
+            sx={{
+              margin: '16px 0',
+              listStyleType: 'disc',
+              width: '500px',
+              paddingLeft: '5px',
+            }}
+          >
+            <FormControlLabel control={<Checkbox defaultChecked />} label="Enable three dots menu" />
+          </Box>
+        </Box>
 
         <Box sx={{
           mb: 5,
@@ -59,7 +79,7 @@ export default function Page() {
             width: '500px'
           }}
             title="Tasks"
-            list={_tasks.slice(0, 4)} /* TODO: replace 3 with 4 and 5 and vise versa  */
+            list={_tasks.slice(0, 5)} /* TODO: replace 3 with 4 and 5 and vise versa  */
             turnOnButton={false} /* TODO: replace turnOnButton={false} with turnOnButton to see how input param works */
           />
         </Box>
