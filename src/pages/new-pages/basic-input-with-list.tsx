@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Box, TextField, Typography, IconButton, InputAdornment } from '@mui/material';
 
 import { CONFIG } from 'src/config-global';
@@ -8,6 +10,17 @@ import { Iconify } from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 export default function Page() {
+  const [value, setValue] = useState('');
+  const [searchItems, setSearchItems] = useState(['item A', 'item B', 'item C']);
+  
+  // Function to add item to list
+  const handleAddItem = () => {
+    if (value.trim() !== '') {
+      setSearchItems([...searchItems, value]);
+      setValue(''); // Clear the input after adding
+    }
+  };
+  
   return (
     <>
       <title>{`Basic Input With List - ${CONFIG.appName}`}</title>
@@ -34,6 +47,13 @@ export default function Page() {
             id="outlined-basic"
             label="Search"
             variant="outlined"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleAddItem();
+              }
+            }}
             slotProps={{
               inputLabel: { shrink: true },
               input: {
@@ -41,7 +61,7 @@ export default function Page() {
                   <InputAdornment position="end" sx={{ pr: '5px' }}>
                     <IconButton
                       edge="end"
-                      onClick={() => console.log('Search clicked', value)}
+                      onClick={handleAddItem}
                       sx={{
                         width: 48,
                         height: 48,
@@ -81,9 +101,9 @@ export default function Page() {
               listStyleType: 'disc',
             }}
           >
-            <li>item 1</li>
-            <li>item 2</li>
-            <li>item 3</li>
+            {searchItems.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </Box>
         </Box>
 
