@@ -15,6 +15,7 @@ import { DashboardLayout } from 'src/layouts/dashboard';
 // React Hello World
 export const HelloWorldPage = lazy(() => import('src/pages/new-pages/hello-world'));
 export const BasicInputPage = lazy(() => import('src/pages/new-pages/basic-input'));
+export const BasicInputWithListPage = lazy(() => import('src/pages/new-pages/basic-input-with-list'));
 
 export const DashboardPage = lazy(() => import('src/pages/dashboard'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
@@ -56,6 +57,7 @@ export const routesSection: RouteObject[] = [
       { index: true, element: <DashboardPage /> },
       { path: 'hello-world', element: <HelloWorldPage /> },
       { path: 'basic-input', element: <BasicInputPage /> },
+      { path: 'basic-input-with-list', element: <BasicInputWithListPage /> },
       { path: 'user', element: <UserPage /> },
       { path: 'products', element: <ProductsPage /> },
       { path: 'blog', element: <BlogPage /> },
