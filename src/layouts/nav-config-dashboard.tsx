@@ -34,6 +34,11 @@ export const navData = [
     icon: icon('ic-blog'),
   },
   {
+    title: 'Component Output',
+    path: '/component-output',
+    icon: icon('ic-blog'),
+  },
+  {
     title: 'Dashboard',
     path: '/',
     icon: icon('ic-analytics'),
