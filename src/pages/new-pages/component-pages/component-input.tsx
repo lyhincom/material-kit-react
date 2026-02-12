@@ -1,3 +1,4 @@
+import { useState } from 'react';
 
 import { Box, Checkbox, Typography, FormControlLabel } from '@mui/material';
 
@@ -10,6 +11,7 @@ import { AnalyticsTasks } from 'src/sections/overview/analytics-tasks';
 // ----------------------------------------------------------------------
 
 export default function Page() {
+  const [enableMenu, setEnableMenu] = useState(false);
 
   return (
     <>
@@ -63,7 +65,15 @@ export default function Page() {
               paddingLeft: '5px',
             }}
           >
-            <FormControlLabel control={<Checkbox defaultChecked />} label="Enable three dots menu" />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={enableMenu}
+                  onChange={(e) => setEnableMenu(e.target.checked)}
+                />
+              }
+              label="Enable three dots menu"
+            />
           </Box>
         </Box>
 
@@ -80,7 +90,7 @@ export default function Page() {
           }}
             title="Tasks"
             list={_tasks.slice(0, 5)} /* TODO: replace 3 with 4 and 5 and vise versa  */
-            turnOnButton={false} /* TODO: replace turnOnButton={false} with turnOnButton to see how input param works */
+            turnOnButton={enableMenu}
           />
         </Box>
 
