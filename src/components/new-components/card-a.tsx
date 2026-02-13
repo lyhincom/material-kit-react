@@ -5,9 +5,18 @@ import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 
+import { useCardMessageStore } from 'src/store/card-message-store';
+
 // ----------------------------------------------------------------------
 
 export function CardA() {
+    const sendMessage = useCardMessageStore((state: { sendMessage: (message: string) => void }) => state.sendMessage);
+
+    const handleSendMessage = () => {
+        const timestamp = new Date().toLocaleTimeString();
+        sendMessage(`Card A event ${timestamp}`);
+    };
+
     return (
         <Box
             sx={{
@@ -17,14 +26,21 @@ export function CardA() {
                 justifyContent: 'center',
             }}
         >
-            <Card sx={{ maxWidth: 345 }}>
+            <Card
+                sx={{
+                    width: 345,
+                    height: 320,
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}
+            >
                 <Box
                     sx={{
                         height: 140,
                         bgcolor: '#ADD8E6', // Light blue
                     }}
                 />
-                <CardContent>
+                <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <Typography gutterBottom variant="h5" component="div">
                         Card A
                     </Typography>
@@ -33,8 +49,8 @@ export function CardA() {
                         species, ranging across all continents except Antarctica
                     </Typography>
                 </CardContent>
-                <CardActions>
-                    <Button size="small" color="primary">
+                <CardActions sx={{ mt: 'auto' }}>
+                    <Button size="small" color="primary" onClick={handleSendMessage}>
                         Event &apos;Card B&apos;
                     </Button>
                 </CardActions>

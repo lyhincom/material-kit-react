@@ -51,6 +51,8 @@ export default function Page() {
             }}
           >
             <li>TODO: send events between two unrelated components;</li>
+            <li>TODO: React (Zustand, Redux), Angular (RxJs) <a target='_blank' href="https://www.reddit.com/r/reactjs/comments/11oge4h/is_rxjs_commonly_used_in_reactjs_for_reactive/" rel="noreferrer">link</a>;</li>
+
           </Box>
         </Box>
 
